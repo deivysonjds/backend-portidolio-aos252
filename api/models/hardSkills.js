@@ -1,3 +1,5 @@
+import { where } from "sequelize";
+
 const getHardSkills = (sequelize, { DataTypes }) => {
     const HardSkills = sequelize.define("hardSkills", {
         name: {
@@ -13,6 +15,16 @@ const getHardSkills = (sequelize, { DataTypes }) => {
             through: 'UserHardskills'
             
         })
+    }
+
+    HardSkills.findByName = async (name)=>{
+        let hardSkill = await HardSkills.findOne({
+            where: {
+                name: name
+            }
+        })
+
+        return hardSkill
     }
     return HardSkills;
 };

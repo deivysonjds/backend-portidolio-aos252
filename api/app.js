@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import {sequelize} from "./models/index.js"
+import seedInDataBase from "./service/seed.js";
 
 const app = express();
 app.set("trust proxy", true);
@@ -22,7 +23,10 @@ const port = process.env.PORT ?? 3000;
 const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true";
 
 sequelize.sync({force: eraseDatabaseOnSync}).then(async () => {
-
+  if (eraseDatabaseOnSync) {
+    await seedInDataBase()
+  }
+  
   app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port} !`);
   });

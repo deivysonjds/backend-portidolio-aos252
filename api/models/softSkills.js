@@ -1,6 +1,6 @@
 const getSoftSkills = (sequelize, { DataTypes }) => {
     const SoftSkills = sequelize.define("softSkills", {
-        name: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true

@@ -9,8 +9,20 @@ const getExperience = (sequelize, { DataTypes }) => {
             allowNull: false
         },
         description: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        start: {
             type: DataTypes.DATE,
             allowNull: false
+        },
+        current: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        end: {
+            type: DataTypes.DATE,
+            allowNull: true
         }
 
     });

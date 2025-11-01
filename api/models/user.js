@@ -35,8 +35,12 @@ const getUserModel = (sequelize, { DataTypes }) => {
   });
 
   User.associate = (models)=>{
-    User.hasMany(models.AcademicBackground)
-    User.hasMany(models.Experience)
+    User.hasMany(models.AcademicBackground, {
+      onDelete: 'CASCADE'
+    })
+    User.hasMany(models.Experience, {
+      onDelete: 'CASCADE'
+    })
     User.belongsToMany(models.HardSkills, {
         through: 'UserHardSkills'
     })
