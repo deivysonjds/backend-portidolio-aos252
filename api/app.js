@@ -3,8 +3,13 @@ import express from "express";
 import {sequelize} from "./models/index.js"
 import seedInDataBase from "./service/seed.js";
 import {
-  userController
+  userController,
+  experienceController,
+  academicBackgroundController,
+  hardskillsController,
+  softskillsController
 } from "./controllers/index.js"
+
 const app = express();
 app.set("trust proxy", true);
 
@@ -17,6 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userController)
+app.use("/experiences", experienceController)
+app.use("/academics", academicBackgroundController)
+app.use("/hardskills", hardskillsController)
+app.use("/softskills", softskillsController)
 
 const port = process.env.PORT ?? 3000;
 
