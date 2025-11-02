@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 
 const getHardSkills = (sequelize, { DataTypes }) => {
     const HardSkills = sequelize.define("hardSkills", {
