@@ -36,11 +36,11 @@ export default async function seedInDataBase(){
     let hardskill6 = await models.HardSkills.create({name: "java"})
     let hardskill7 = await models.HardSkills.create({name: "C#"})
 
-    await user1.addHardSkills([hardskill1, hardskill2, hardskill3, hardskill4, hardskill5, hardskill6, hardskill7])
+    await user1.addHardSkill([hardskill1, hardskill2, hardskill3, hardskill4, hardskill5, hardskill6, hardskill7])
 
     let softSkills1 = await models.SoftSkills.create({description: "ótima comunicação"})
     let softSkills2 = await models.SoftSkills.create({description: "Senso crítico"})
     let softSkills3 = await models.SoftSkills.create({description: "alta capacidade de aprendizado"})
 
-    await user1.addSoftSkills([softSkills1, softSkills2, softSkills3])
+    await user1.addSoftSkill([softSkills1, softSkills2, softSkills3])
 }

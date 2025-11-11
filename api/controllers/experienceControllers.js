@@ -49,9 +49,8 @@ router.put("/:id", async (req, res)=>{
         current,
         end
     } = req.body
-    let {userId} = req.query
 
-    if(!position || !enterprise || !description || !start || !current || !userId) return res.status(400).json({message: "Invalid parameters"})
+    if(!position || !enterprise || !description || !start || !current ) return res.status(400).json({message: "Invalid parameters"})
     
     experience.position = position
     experience.enterprise = enterprise

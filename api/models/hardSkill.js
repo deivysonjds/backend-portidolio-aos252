@@ -1,19 +1,19 @@
 
 const getHardSkills = (sequelize, { DataTypes }) => {
-    const HardSkills = sequelize.define("hardSkills", {
+    const HardSkills = sequelize.define("HardSkill", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
         }
 
     });
 
     HardSkills.associate = (models) => {
         HardSkills.belongsToMany(models.User, {
-            through: 'UserHardskills'
-            
-        })
+            through: 'UserHardSkills',
+            as: 'users',
+            foreignKey: 'hardSkillId'
+        });
     }
 
     HardSkills.findByName = async (name)=>{

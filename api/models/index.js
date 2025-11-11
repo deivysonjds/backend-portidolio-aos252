@@ -3,9 +3,10 @@ import pg from "pg"
 import getUserModel from "./user.js";
 import getAcademicBackground from "./academicBackground.js";
 import getExperience from "./experience.js";
+import getHardSkills from "./hardSkill.js";
+import getSoftSkills from "./softSkill.js";
+import getProject from "./project.js";
 import "dotenv/config";
-import getHardSkills from "./hardSkills.js";
-import getSoftSkills from "./softSkills.js";
 
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
   dialect: "postgres",
@@ -25,7 +26,8 @@ const models = {
   AcademicBackground: getAcademicBackground(sequelize, Sequelize),
   Experience: getExperience(sequelize, Sequelize),
   HardSkills: getHardSkills(sequelize, Sequelize),
-  SoftSkills: getSoftSkills(sequelize, Sequelize)
+  SoftSkills: getSoftSkills(sequelize, Sequelize),
+  Projects: getProject(sequelize, Sequelize)
 };
 
 Object.keys(models).forEach((key) => {

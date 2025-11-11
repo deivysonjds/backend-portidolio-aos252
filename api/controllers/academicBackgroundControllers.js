@@ -16,6 +16,7 @@ router.get("/", async (req, res)=>{
     return res.status(200).json(academicBackgrounds)
 })
 
+
 router.get("/:id", async (req, res)=>{
     let id = req.params.id
 

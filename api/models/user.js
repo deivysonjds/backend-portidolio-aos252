@@ -1,5 +1,5 @@
 const getUserModel = (sequelize, { DataTypes }) => {
-  const User = sequelize.define("user", {
+  const User = sequelize.define("users", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -36,17 +36,23 @@ const getUserModel = (sequelize, { DataTypes }) => {
 
   User.associate = (models)=>{
     User.hasMany(models.AcademicBackground, {
+      as: "academic_background",
       onDelete: 'CASCADE'
     })
     User.hasMany(models.Experience, {
+      as: 'experience',
       onDelete: 'CASCADE'
-    })
+    });
     User.belongsToMany(models.HardSkills, {
-        through: 'UserHardSkills'
+        through: 'UserHardSkills',
+        as: 'HardSkill',
+        foreignKey: 'userId'
     })
     User.belongsToMany(models.SoftSkills, {
-        through: 'UserSoftSkills'
-    })
+        through: 'UserSoftSkills',
+        as: 'SoftSkill',
+        foreignKey: 'userId'
+    });
   }
 
   return User;

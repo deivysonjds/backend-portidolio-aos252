@@ -2,6 +2,46 @@ import { Router } from "express";
 import models from "../models/index.js";
 const router = Router()
 
+router.post("/", async (req, res)=>{
+
+    let {
+        name,
+        email,
+        contact,
+        linkedin,
+        github,
+        website,
+        academic_background,
+        experience,
+        hardskill,
+        softskill
+    } = req.body
+
+    if(!name || !email || !contact) return res.status(400).json({message: "Invalid parameters"})
+    
+    let user = await models.User.create({
+        name: name,
+        email: email,
+        contact: contact,
+        linkedin: linkedin,
+        github: github,
+        website: website,
+        academic_background: academic_background,
+        experience: experience,
+        softSkill: softskill,
+        hardSkill: hardskill
+    },
+    {
+        include: [
+            {model: models.Experience, as: "experience"},
+            {model: models.AcademicBackground, as: "academic_background"},
+            {model: models.HardSkills, as: "HardSkill"},
+            {model: models.SoftSkills, as: "SoftSkill"}
+        ]
+    })
+    return res.status(201).json(user)
+})
+
 router.get("/", async (req, res)=>{
     let users = await models.User.findAll({
         include: [{all: true, nested: true}]

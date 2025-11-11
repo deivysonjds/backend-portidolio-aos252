@@ -20,7 +20,10 @@ const getAcademicBackground = (sequelize, { DataTypes }) => {
     });
 
     AcademicBackground.associate = (models) => {
-        AcademicBackground.belongsTo(models.User)
+        AcademicBackground.belongsTo(models.User, {
+        as: 'users',
+        foreignKey: 'userId'
+        });
     }
     return AcademicBackground;
 };
