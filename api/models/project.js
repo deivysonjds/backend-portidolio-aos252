@@ -1,5 +1,5 @@
 const getProject = (sequelize, { DataTypes }) => {
-    const Project = sequelize.define("Project", {
+    const Project = sequelize.define("project", {
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -9,6 +9,10 @@ const getProject = (sequelize, { DataTypes }) => {
             allowNull: false
         }
     });
+
+    Project.associate = (models) => {
+        Project.belongsTo(models.User)
+    }
 
     return Project;
 };

@@ -43,6 +43,10 @@ const getUserModel = (sequelize, { DataTypes }) => {
       as: 'experience',
       onDelete: 'CASCADE'
     });
+    User.hasMany(models.Projects, {
+      as: 'project',
+      onDelete: 'CASCADE'
+    });
     User.belongsToMany(models.HardSkills, {
         through: 'UserHardSkills',
         as: 'HardSkill',
