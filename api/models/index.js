@@ -17,6 +17,12 @@ const sequelize = new Sequelize(process.env.POSTGRES_URL, {
       rejectUnauthorized: false,
     },
   },
+  pool: {
+    max: 1,
+    min: 0,
+    idle: 10000,
+    acquire: 30000
+  },
   dialectModule: pg,
   logging: console.log
 });
