@@ -2,10 +2,29 @@ import { Router } from "express";
 import models from "../models/index.js";
 const router = Router()
 
+router.post("/", async (req, res)=>{
+    let {userId} = req.query
+
+    let {
+        name, 
+        description
+    } = req.body
+
+    if(!name || !description || !userId) return res.status(400).json({message: "Invalid parameters"})
+
+    let project = await models.Projects.create({
+        name: name,
+        description: description,
+        userId: userId
+    })
+
+    return res.status(201).json(project)
+})
+
 router.get("/", async (req, res)=>{
     let {userId} = req.query
 
-    if(!userId) return res.status(400).json({message: "Invalid parameters"})
+    // if(!userId) return res.status(400).json({message: "Invalid parameters"})
     
     let projects = await models.Projects.findAll({
         where: {

@@ -7,7 +7,8 @@ import {
   experienceController,
   academicBackgroundController,
   hardskillsController,
-  softskillsController
+  softskillsController,
+  projectController
 } from "./controllers/index.js"
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userController)
+app.use("/projects", projectController)
 app.use("/experiences", experienceController)
 app.use("/academics", academicBackgroundController)
 app.use("/hardskills", hardskillsController)

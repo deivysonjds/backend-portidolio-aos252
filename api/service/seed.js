@@ -28,6 +28,24 @@ export default async function seedInDataBase(){
         userId: user1.id
     })
 
+    await models.Projects.create({
+        name: "Bot whatsapp",
+        description: "Sistema que envia mensagens pelo whatsapp para clientes a partir de uma planilha. Tecnologias: node.js, electron, whatsapp-web-js, back4app",
+        userId: user1.id
+    })
+    
+    await models.Projects.create({
+        name: "Automação web",
+        description: "Automação para formalização de acordos e envio dos dados e boletos por e-mail pela intranet da empresa. Tecnologias: Python, selenium, openpyxl, pywin32, back4app",
+        userId: user1.id
+    })
+    
+    await models.Projects.create({
+        name: "Website de vendas de carros seminovos",
+        description: "Sistema para empresa de venda de carros seminovos, onde é possível registrar e manipular dados de carros e clientes. tecnologias usadas: Java ( Spring boot ), React.js",
+        userId: user1.id
+    })
+
     let hardskill1 = await models.HardSkills.create({name: "node.js"})
     let hardskill2 = await models.HardSkills.create({name: "spring boot"})
     let hardskill3 = await models.HardSkills.create({name: "ASP.NET"})
