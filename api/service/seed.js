@@ -28,6 +28,16 @@ export default async function seedInDataBase(){
         userId: user1.id
     })
 
+    await models.Experience.create({
+        position: "Dev BackEnd",
+        enterprise: "Sistemas bem vivendo de informática",
+        description: "Criação de api rest para um sistema de venda de rifas Online",
+        start: new Date(2020, 3, 1),
+        current: false,
+        end: new Date(2024, 5, 30),
+        userId: user1.id
+    })
+
     await models.Projects.create({
         name: "Bot whatsapp",
         description: "Sistema que envia mensagens pelo whatsapp para clientes a partir de uma planilha. Tecnologias: node.js, electron, whatsapp-web-js, back4app",

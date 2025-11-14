@@ -2,11 +2,34 @@ import { Router } from "express";
 import models from "../models/index.js";
 const router = Router()
 
-router.get("/", async (req, res)=>{
-    let {userId} = req.query
+router.post("/", async (req, res) => {
+    let { userId } = req.query
 
-    if(!userId) return res.status(400).json({message: "Invalid parameters"})
-    
+    let {
+        courseName,
+        institution,
+        start,
+        end,
+    } = req.body
+
+    if (!courseName || !institution || !start || !end || !userId) return res.status(400).json({ message: "Invalid parameters" })
+
+    let academicBackground = await models.AcademicBackground.create({
+        courseName: courseName,
+        institution: institution,
+        start: start,
+        end: end,
+        userId: userId
+    })
+
+    return res.status(201).json(academicBackground)
+})
+
+router.get("/", async (req, res) => {
+    let { userId } = req.query
+
+    if (!userId) return res.status(400).json({ message: "Invalid parameters" })
+
     let academicBackgrounds = await models.AcademicBackground.findAll({
         where: {
             userId: userId
@@ -17,7 +40,7 @@ router.get("/", async (req, res)=>{
 })
 
 
-router.get("/:id", async (req, res)=>{
+router.get("/:id", async (req, res) => {
     let id = req.params.id
 
     let academicBackground = await models.AcademicBackground.findOne({
@@ -26,12 +49,12 @@ router.get("/:id", async (req, res)=>{
         }
     })
 
-    if(!academicBackground) return res.status(404).json({message:"Not found"})
+    if (!academicBackground) return res.status(404).json({ message: "Not found" })
 
     return res.status(200).json(academicBackground)
 })
 
-router.put("/:id", async (req, res)=>{
+router.put("/:id", async (req, res) => {
     let id = req.params.id
 
     let academicBackground = await models.AcademicBackground.findOne({
@@ -40,18 +63,17 @@ router.put("/:id", async (req, res)=>{
         }
     })
 
-    if(!academicBackground) return res.status(404).json({message: "Not found"})
-    
+    if (!academicBackground) return res.status(404).json({ message: "Not found" })
+
     let {
         courseName,
         institution,
         start,
         end,
     } = req.body
-    let {userId} = req.query
 
-    if(!courseName || !institution || !start || !end || !userId) return res.status(400).json({message: "Invalid parameters"})
-    
+    if (!courseName || !institution || !start || !end ) return res.status(400).json({ message: "Invalid parameters" })
+
     academicBackground.courseName = courseName
     academicBackground.institution = institution
     academicBackground.start = start
@@ -62,7 +84,7 @@ router.put("/:id", async (req, res)=>{
     return res.status(200).json(academicBackground)
 })
 
-router.delete("/:id", async(req, res)=>{
+router.delete("/:id", async (req, res) => {
     let id = req.params.id
 
     let academicBackground = await models.AcademicBackground.findOne({
@@ -71,11 +93,11 @@ router.delete("/:id", async(req, res)=>{
         }
     })
 
-    if(!academicBackground) return res.status(404).json({message: "Not found"})
-    
+    if (!academicBackground) return res.status(404).json({ message: "Not found" })
+
     await academicBackground.destroy()
 
-    return res.status(204).json({message: "Academic Background deleted"})
+    return res.status(204).json({ message: "Academic Background deleted" })
 })
 
 export default router;

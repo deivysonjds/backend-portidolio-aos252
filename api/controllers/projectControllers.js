@@ -24,7 +24,7 @@ router.post("/", async (req, res)=>{
 router.get("/", async (req, res)=>{
     let {userId} = req.query
 
-    // if(!userId) return res.status(400).json({message: "Invalid parameters"})
+    if(!userId) return res.status(400).json({message: "Invalid parameters"})
     
     let projects = await models.Projects.findAll({
         where: {
