@@ -56,19 +56,19 @@ export default async function seedInDataBase(){
         userId: user1.id
     })
 
-    let hardskill1 = await models.HardSkills.create({name: "node.js"})
-    let hardskill2 = await models.HardSkills.create({name: "spring boot"})
-    let hardskill3 = await models.HardSkills.create({name: "ASP.NET"})
-    let hardskill4 = await models.HardSkills.create({name: "javascript"})
-    let hardskill5 = await models.HardSkills.create({name: "typescript"})
-    let hardskill6 = await models.HardSkills.create({name: "java"})
-    let hardskill7 = await models.HardSkills.create({name: "C#"})
+    let hardskill1 = await models.HardSkill.create({name: "node.js"})
+    let hardskill2 = await models.HardSkill.create({name: "spring boot"})
+    let hardskill3 = await models.HardSkill.create({name: "ASP.NET"})
+    let hardskill4 = await models.HardSkill.create({name: "javascript"})
+    let hardskill5 = await models.HardSkill.create({name: "typescript"})
+    let hardskill6 = await models.HardSkill.create({name: "java"})
+    let hardskill7 = await models.HardSkill.create({name: "C#"})
 
     await user1.addHardSkill([hardskill1, hardskill2, hardskill3, hardskill4, hardskill5, hardskill6, hardskill7])
 
-    let softSkills1 = await models.SoftSkills.create({description: "ótima comunicação"})
-    let softSkills2 = await models.SoftSkills.create({description: "Senso crítico"})
-    let softSkills3 = await models.SoftSkills.create({description: "alta capacidade de aprendizado"})
+    let softSkills1 = await models.SoftSkill.create({description: "ótima comunicação"})
+    let softSkills2 = await models.SoftSkill.create({description: "Senso crítico"})
+    let softSkills3 = await models.SoftSkill.create({description: "alta capacidade de aprendizado"})
 
     await user1.addSoftSkill([softSkills1, softSkills2, softSkills3])
 }

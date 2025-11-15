@@ -1,5 +1,5 @@
-const getSoftSkills = (sequelize, { DataTypes }) => {
-    const SoftSkills = sequelize.define("SoftSkill", {
+const getSoftSkill = (sequelize, { DataTypes }) => {
+    const SoftSkill = sequelize.define("SoftSkill", {
         description: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -8,14 +8,14 @@ const getSoftSkills = (sequelize, { DataTypes }) => {
 
     });
 
-    SoftSkills.associate = (models) => {
-        SoftSkills.belongsToMany(models.User, {
+    SoftSkill.associate = (models) => {
+        SoftSkill.belongsToMany(models.User, {
             through: 'UserSoftSkills',
             as: 'users',
             foreignKey: 'softSkillId'
         });
     }
-    return SoftSkills;
+    return SoftSkill;
 };
 
-export default getSoftSkills;
+export default getSoftSkill;

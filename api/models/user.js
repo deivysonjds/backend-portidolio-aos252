@@ -8,33 +8,33 @@ const getUserModel = (sequelize, { DataTypes }) => {
       },
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            isEmail: true
-        },
-        unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      },
+      unique: true
     },
     contact: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     linkedin: {
-        type: DataTypes.STRING,
-        allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true
     },
     github: {
-        type: DataTypes.STRING,
-        allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true
     },
     website: {
-        type: DataTypes.STRING,
-        allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true
     }
 
   });
 
-  User.associate = (models)=>{
+  User.associate = (models) => {
     User.hasMany(models.AcademicBackground, {
       as: "academic_background",
       onDelete: 'CASCADE'
@@ -47,15 +47,16 @@ const getUserModel = (sequelize, { DataTypes }) => {
       as: 'project',
       onDelete: 'CASCADE'
     });
-    User.belongsToMany(models.HardSkills, {
-        through: 'UserHardSkills',
-        as: 'HardSkill',
-        foreignKey: 'userId'
-    })
-    User.belongsToMany(models.SoftSkills, {
-        through: 'UserSoftSkills',
-        as: 'SoftSkill',
-        foreignKey: 'userId'
+    User.belongsToMany(models.HardSkill, {
+      through: 'UserHardSkills',
+      as: 'hardSkills',
+      foreignKey: 'userId'
+    });
+
+    User.belongsToMany(models.SoftSkill, {
+      through: 'UserSoftSkills',
+      as: 'softSkills',
+      foreignKey: 'userId'
     });
   }
 

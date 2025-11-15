@@ -1,6 +1,6 @@
 
-const getHardSkills = (sequelize, { DataTypes }) => {
-    const HardSkills = sequelize.define("HardSkill", {
+const getHardSkill = (sequelize, { DataTypes }) => {
+    const HardSkill = sequelize.define("HardSkill", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -9,16 +9,16 @@ const getHardSkills = (sequelize, { DataTypes }) => {
 
     });
 
-    HardSkills.associate = (models) => {
-        HardSkills.belongsToMany(models.User, {
+    HardSkill.associate = (models) => {
+        HardSkill.belongsToMany(models.User, {
             through: 'UserHardSkills',
             as: 'users',
             foreignKey: 'hardSkillId'
         });
     }
 
-    HardSkills.findByName = async (name)=>{
-        let hardSkill = await HardSkills.findOne({
+    HardSkill.findByName = async (name) => {
+        let hardSkill = await HardSkill.findOne({
             where: {
                 name: name
             }
@@ -26,7 +26,7 @@ const getHardSkills = (sequelize, { DataTypes }) => {
 
         return hardSkill
     }
-    return HardSkills;
+    return HardSkill;
 };
 
-export default getHardSkills;
+export default getHardSkill;

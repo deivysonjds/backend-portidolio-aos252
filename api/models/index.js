@@ -3,8 +3,8 @@ import pg from "pg"
 import getUserModel from "./user.js";
 import getAcademicBackground from "./academicBackground.js";
 import getExperience from "./experience.js";
-import getHardSkills from "./hardSkill.js";
-import getSoftSkills from "./softSkill.js";
+import getHardSkill from "./hardSkill.js";
+import getSoftSkill from "./softSkill.js";
 import getProject from "./project.js";
 import "dotenv/config";
 
@@ -31,8 +31,8 @@ const models = {
   User: getUserModel(sequelize, Sequelize),
   AcademicBackground: getAcademicBackground(sequelize, Sequelize),
   Experience: getExperience(sequelize, Sequelize),
-  HardSkills: getHardSkills(sequelize, Sequelize),
-  SoftSkills: getSoftSkills(sequelize, Sequelize),
+  HardSkill: getHardSkill(sequelize, Sequelize),
+  SoftSkill: getSoftSkill(sequelize, Sequelize),
   Projects: getProject(sequelize, Sequelize)
 };
 

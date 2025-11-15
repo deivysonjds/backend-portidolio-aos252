@@ -29,18 +29,18 @@ app.use("/academics", academicBackgroundController)
 app.use("/hardskills", hardskillsController)
 app.use("/softskills", softskillsController)
 
-// const port = process.env.PORT ?? 3000;
+const port = process.env.PORT ?? 3000;
 
-// const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true";
+const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true";
 
-// sequelize.sync().then(async () => {
-//   if (eraseDatabaseOnSync) {
-//     await seedInDataBase()
-//   }
+sequelize.sync({force: eraseDatabaseOnSync}).then(async () => {
+  if (eraseDatabaseOnSync) {
+    await seedInDataBase()
+  }
   
-//   app.listen(port, () => {
-//     console.log(`Server is running in http://localhost:${port} !`);
-//   });
-// });
+  app.listen(port, () => {
+    console.log(`Server is running in http://localhost:${port} !`);
+  });
+});
 
 export default app;
