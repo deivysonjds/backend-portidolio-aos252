@@ -17,20 +17,20 @@ router.post("/", async (req, res) => {
 
         if (!user) return res.status(404).json({ message: "User not found" })
 
-        let existsSoftskill = await models.SoftSkills.findOne({
+        let existsSoftskill = await models.SoftSkill.findOne({
             where: {
                 description: description
             }
         })
 
-        if(!existsSoftskill) existsSoftskill = await models.SoftSkills.create({description: description})
+        if(!existsSoftskill) existsSoftskill = await models.SoftSkill.create({description: description})
         
         await user.addSoftSkill(existsSoftskill)
 
         return res.status(201).json(existsSoftskill)
     }
 
-    let softskill = await models.SoftSkills.create({description: description})
+    let softskill = await models.SoftSkill.create({description: description})
         
     return res.status(201).json(softskill)
 })
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
     let { userId } = req.query
 
     if (!userId) {
-        let softSkill = await models.SoftSkills.findAll()
+        let softSkill = await models.SoftSkill.findAll()
 
         return res.status(200).json(softSkill)
     }
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
     let user = await models.User.findByPk(userId, {
         include: [
             {
-                model: models.SoftSkills,
+                model: models.SoftSkill,
                 as: 'SoftSkill',
                 through: { attributes: [] }
             }
@@ -65,7 +65,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     let id = req.params.id
 
-    let hardskill = await models.SoftSkills.findOne({
+    let hardskill = await models.SoftSkill.findOne({
         where: {
             id: id
         }
@@ -79,7 +79,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     let id = req.params.id
 
-    let hardskill = await models.SoftSkills.findOne({
+    let hardskill = await models.SoftSkill.findOne({
         where: {
             id: id
         }
@@ -103,7 +103,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     let id = req.params.id
 
-    let hardSkill = await models.SoftSkills.findOne({
+    let hardSkill = await models.SoftSkill.findOne({
         where: {
             id: id
         }
