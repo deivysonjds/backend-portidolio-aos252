@@ -100,9 +100,15 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
-    let users = await models.User.findAll({
-        include: [{ all: true, nested: true }]
-    })
+    let users
+    try {
+        users = await models.User.findAll({
+            include: [{ all: true, nested: true }]
+        })
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
 
     return res.status(200).json(users)
 })
