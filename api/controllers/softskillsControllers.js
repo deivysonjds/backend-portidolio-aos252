@@ -49,7 +49,7 @@ router.get("/", async (req, res) => {
         include: [
             {
                 model: models.SoftSkill,
-                as: 'SoftSkill',
+                as: 'softSkills',
                 through: { attributes: [] }
             }
         ]
@@ -57,7 +57,7 @@ router.get("/", async (req, res) => {
 
     if (!user) return res.status(404).json({ message: "Not found" })
 
-    let softSkillsByUser = await user.getSoftSkill()
+    let softSkillsByUser = await user.getSoftSkills()
 
     return res.status(200).json(softSkillsByUser)
 })

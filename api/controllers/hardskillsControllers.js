@@ -17,20 +17,20 @@ router.post("/", async (req, res) => {
 
         if (!user) return res.status(404).json({ message: "User not found" })
 
-        let existsHardskill = await models.HardSkills.findOne({
+        let existsHardskill = await models.HardSkill.findOne({
             where: {
                 name: name
             }
         })
 
-        if(!existsHardskill) existsHardskill = await models.HardSkills.create({name: name})
+        if(!existsHardskill) existsHardskill = await models.HardSkill.create({name: name})
         
         await user.addHardSkill(existsHardskill)
 
         return res.status(201).json(existsHardskill)
     }
 
-    let hardskill = await models.HardSkills.create({name: name})
+    let hardskill = await models.HardSkill.create({name: name})
         
     return res.status(201).json(hardskill)
 })
@@ -40,7 +40,7 @@ router.get("/", async (req, res)=>{
     let {userId} = req.query
 
     if (!userId) {
-        let hardskills = await models.HardSkills.findAll()
+        let hardskills = await models.HardSkill.findAll()
 
         return res.status(200).json(hardskills)
     }
@@ -48,8 +48,8 @@ router.get("/", async (req, res)=>{
     let user = await models.User.findByPk(userId,{
         include: [
             {
-                model: models.HardSkills,
-                as: 'HardSkill',
+                model: models.HardSkill,
+                as: 'hardSkills',
                 through: { attributes: [] }
             }
         ]
@@ -57,7 +57,7 @@ router.get("/", async (req, res)=>{
 
     if(!user) return res.status(404).json({message: "Not found"})
 
-    let hardskillsByUser = await user.getHardSkill()
+    let hardskillsByUser = await user.getHardSkills()
 
     return res.status(200).json(hardskillsByUser)
 })
@@ -65,7 +65,7 @@ router.get("/", async (req, res)=>{
 router.get("/:id", async (req, res)=>{
     let id = req.params.id
 
-    let hardskill = await models.HardSkills.findOne({
+    let hardskill = await models.HardSkill.findOne({
         where: {
             id: id
         }
@@ -79,7 +79,7 @@ router.get("/:id", async (req, res)=>{
 router.put("/:id", async (req, res)=>{
     let id = req.params.id
 
-    let hardskill = await models.HardSkills.findOne({
+    let hardskill = await models.HardSkill.findOne({
         where: {
             id: id
         }
@@ -103,7 +103,7 @@ router.put("/:id", async (req, res)=>{
 router.delete("/:id", async(req, res)=>{
     let id = req.params.id
 
-    let hardSkill = await models.HardSkills.findOne({
+    let hardSkill = await models.HardSkill.findOne({
         where: {
             id: id
         }
