@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
             include: [
                 { model: models.Experience, as: "experience" },
                 { model: models.AcademicBackground, as: "academic_background" },
-                { model: models.Projects, as: "project" },
+                { model: models.Project, as: "projects" },
             ]
         })
         console.log("\n\nchegou aqui\n\n");
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
     if (!!HardSkill) {
             const skillNames = HardSkill.map((s) => s.name);
 
-            const existingSkills = await models.HardSkills.findAll({
+            const existingSkills = await models.HardSkill.findAll({
                 where: { name: { [Op.in]: skillNames } },
             });
             console.log(existingSkills);
@@ -58,7 +58,7 @@ router.post("/", async (req, res) => {
 
             let newSkills = [];
             if (newSkillsData.length > 0) {
-                newSkills = await models.HardSkills.bulkCreate(newSkillsData, {
+                newSkills = await models.HardSkill.bulkCreate(newSkillsData, {
                     returning: true,
                 });
             }
@@ -70,7 +70,7 @@ router.post("/", async (req, res) => {
         if (SoftSkill && SoftSkill.length > 0) {
             const skillDescriptions = SoftSkill.map((s) => s.description);
 
-            const existingSkills = await models.SoftSkills.findAll({
+            const existingSkills = await models.SoftSkill.findAll({
                 where: { description: { [Op.in]: skillDescriptions } },
             });
 
@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
 
             let newSkills = [];
             if (newSkillsData.length > 0) {
-                newSkills = await models.SoftSkills.bulkCreate(newSkillsData, {
+                newSkills = await models.SoftSkill.bulkCreate(newSkillsData, {
                     returning: true,
                 });
             }

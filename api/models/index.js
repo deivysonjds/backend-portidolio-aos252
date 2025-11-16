@@ -33,7 +33,7 @@ const models = {
   Experience: getExperience(sequelize, Sequelize),
   HardSkill: getHardSkill(sequelize, Sequelize),
   SoftSkill: getSoftSkill(sequelize, Sequelize),
-  Projects: getProject(sequelize, Sequelize)
+  Project: getProject(sequelize, Sequelize)
 };
 
 Object.keys(models).forEach((key) => {

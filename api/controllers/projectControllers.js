@@ -11,12 +11,18 @@ router.post("/", async (req, res)=>{
     } = req.body
 
     if(!name || !description || !userId) return res.status(400).json({message: "Invalid parameters"})
-
-    let project = await models.Projects.create({
-        name: name,
-        description: description,
-        userId: userId
-    })
+    
+    let project 
+    try {
+        project = await models.Project.create({
+            name: name,
+            description: description,
+            userId: userId
+        })
+        
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
 
     return res.status(201).json(project)
 })
@@ -26,7 +32,7 @@ router.get("/", async (req, res)=>{
 
     if(!userId) return res.status(400).json({message: "Invalid parameters"})
     
-    let projects = await models.Projects.findAll({
+    let projects = await models.Project.findAll({
         where: {
             userId: userId
         }
@@ -38,7 +44,7 @@ router.get("/", async (req, res)=>{
 router.get("/:id", async (req, res)=>{
     let id = req.params.id
 
-    let project = await models.Projects.findOne({
+    let project = await models.Project.findOne({
         where: {
             id: id
         }
@@ -52,7 +58,7 @@ router.get("/:id", async (req, res)=>{
 router.put("/:id", async (req, res)=>{
     let id = req.params.id
 
-    let project = await models.Projects.findOne({
+    let project = await models.Project.findOne({
         where: {
             id: id
         }
@@ -78,7 +84,7 @@ router.put("/:id", async (req, res)=>{
 router.delete("/:id", async(req, res)=>{
     let id = req.params.id
 
-    let project = await models.Projects.findOne({
+    let project = await models.Project.findOne({
         where: {
             id: id
         }

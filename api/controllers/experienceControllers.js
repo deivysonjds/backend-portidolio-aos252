@@ -15,16 +15,22 @@ router.post("/", async (req, res) => {
     } = req.body
 
     if (!position || !description || !enterprise || !start || !current || !userId) return res.status(400).json({ message: "Invalid parameters" })
-
-    let experience = await models.Experience.create({
-        position: position,
-        enterprise: enterprise,
-        description: description,
-        start: start,
-        current: current,
-        end: end,
-        userId: userId
-    })
+    
+        let experience
+        try {
+            
+            experience = await models.Experience.create({
+                position: position,
+                enterprise: enterprise,
+                description: description,
+                start: start,
+                current: current,
+                end: end,
+                userId: userId
+            })
+        } catch (error) {
+            return res.status(500).json({message: error.message})
+        }
 
     return res.status(201).json(experience)
 })

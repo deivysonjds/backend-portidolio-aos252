@@ -14,13 +14,18 @@ router.post("/", async (req, res) => {
 
     if (!courseName || !institution || !start || !end || !userId) return res.status(400).json({ message: "Invalid parameters" })
 
-    let academicBackground = await models.AcademicBackground.create({
+    let academicBackground
+    try {
+        academicBackground = await models.AcademicBackground.create({
         courseName: courseName,
         institution: institution,
         start: start,
         end: end,
         userId: userId
     })
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
 
     return res.status(201).json(academicBackground)
 })
